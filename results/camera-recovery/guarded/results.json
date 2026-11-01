@@ -1,0 +1,83 @@
+{
+  "task": "pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate",
+  "instruction": "pick up the black bowl from table center and place it on the plate",
+  "model": "lerobot/smolvla_libero_plus",
+  "model_revision": "7bb70aa5bc92b82c9239142775d3a173103567ff",
+  "model_sha256": "a67a056ab0761afa5f5efef8edd45065cef4494735231b7eeeb8328e71fcfb72",
+  "training_in_this_project": false,
+  "control_hz": 20,
+  "max_steps": 280,
+  "camera_observation_size": 128,
+  "video_size": 512,
+  "video_fps": 20,
+  "success_definition": "LIBERO task goal; collision-free competition scoring is not applied",
+  "action_change_definition": "Mean L2 norm of consecutive differences in the six normalized arm action channels; excludes gripper. Not physical jerk.",
+  "versions": {
+    "torch": "2.11.0",
+    "lerobot": "0.6.0",
+    "mujoco": "3.7.0",
+    "robosuite": "1.4.1",
+    "numpy": "2.2.6",
+    "transformers": "5.5.4"
+  },
+  "device": "mps",
+  "settings": {
+    "plain": {
+      "action_steps": 25,
+      "blend_steps": 0,
+      "ema_alpha": 1.0,
+      "ensemble_stride": 0,
+      "ensemble_temperature": 0.35
+    }
+  },
+  "episodes": [
+    {
+      "variant": "plain",
+      "initial_state_index": 0,
+      "seed": 42,
+      "success": true,
+      "steps": 134,
+      "simulated_seconds": 6.7,
+      "wall_seconds": 8.023540749998574,
+      "path_length_m": 0.8007694480639558,
+      "mean_arm_action_change": 0.07003328204154968,
+      "video": "plain_00.mp4",
+      "trajectory": "plain_00.npz"
+    }
+  ],
+  "camera_fault": {
+    "camera": "robot0_eye_in_hand_image",
+    "start_step": 20,
+    "end_step_exclusive": 60,
+    "type": "injected all-black image; camera restored after 2 simulated seconds"
+  },
+  "camera_recovery_enabled": true,
+  "prediction_steps": [
+    0,
+    62,
+    87,
+    112
+  ],
+  "camera_recovery_events": [
+    {
+      "step": 20,
+      "event": "pause",
+      "invalid_cameras": [
+        "robot0_eye_in_hand_image"
+      ]
+    },
+    {
+      "step": 62,
+      "event": "resume_with_new_plan"
+    }
+  ],
+  "paused_steps": 42,
+  "input_capture": {
+    "file": "wrist_inputs.npz",
+    "frames": 134,
+    "fps": 20,
+    "pixels": "actual post-fault-injection wrist RGB pixels, rotated 180 degrees exactly as policy._image()",
+    "alignment": "input step i is paired with external-camera frame i, before action i",
+    "model_use": "camera input recorded each control step; model uses the current image only at prediction_steps; guard consumes no model predictions while paused"
+  }
+}

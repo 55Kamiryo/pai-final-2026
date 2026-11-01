@@ -1,0 +1,24 @@
+[project]
+name = "pai-final-2026"
+version = "0.1.0"
+description = "SmolVLA table clearing with camera-blackout stop and recovery"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "lerobot[smolvla]==0.6.0",
+    "torch==2.11.0",
+    "transformers==5.5.4",
+    "numpy==2.2.6",
+    "mujoco==3.7.0",
+    "robosuite==1.4.1",
+    "bddl==1.0.1",
+    "gym==0.26.2",
+    "easydict==1.13",
+    "future==1.0.0",
+    "scikit-image==0.25.2",
+    "wand==0.6.13",
+    "Pillow>=12,<13",
+    "reportlab>=4,<5",
+]
+
+[tool.uv]
+package = false
